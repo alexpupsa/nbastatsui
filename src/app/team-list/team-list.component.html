@@ -1,23 +1,49 @@
 <ul>
     <li *ngFor="let game of games">
-        <div>
-            {{getTeamName(game.homeResult.teamId)}}
-            <ul *ngIf="game.homeResult.results">
-                <li *ngFor="let result of game.homeResult.results">
-                    {{result.isHomeTeam ? result.homeScore : result.awayScore}} -
-                    {{result.isHomeTeam ? result.awayScore : result.homeScore}}
-                </li>
-            </ul>
+        <div class="margin-top-20">
+            {{getTeamName(game.homeResult.teamId)}} - {{getTeamName(game.awayResult.teamId)}}
         </div>
-        -
-        <div>
-            {{getTeamName(game.awayResult.teamId)}}
-            <ul *ngIf="game.awayResult.results">
-                <li *ngFor="let result of game.awayResult.results">
-                    {{result.isHomeTeam ? result.homeScore : result.awayScore}} -
-                    {{result.isHomeTeam ? result.awayScore : result.homeScore}}
-                </li>
-            </ul>
+        <div class="margin-top-10">
+            Average 5 games: {{game.homeResult.avg5Games | number : '1.2-2'}} -
+            {{game.awayResult.avg5Games | number : '1.2-2'}}
         </div>
+        <div>
+            Average 10 games: {{game.homeResult.avg10Games | number : '1.2-2'}} -
+            {{game.awayResult.avg10Games | number : '1.2-2'}}
+        </div>
+        <div>
+            Average Home/Away games: {{game.homeResult.avgHomeAwayGames | number : '1.2-2'}} -
+            {{game.awayResult.avgHomeAwayGames | number : '1.2-2'}}
+        </div>
+        <div>
+            Average All games: {{game.homeResult.avgAllGames | number : '1.2-2'}} -
+            {{game.awayResult.avgAllGames | number : '1.2-2'}}
+        </div>
+        <div class="margin-top-10">
+            Total 5 games: {{game.homeResult.avg5Games + game.awayResult.avg5Games | number : '1.2-2'}}
+        </div>
+        <div>
+            Total 10 games: {{game.homeResult.avg10Games + game.awayResult.avg10Games | number : '1.2-2'}}
+        </div>
+        <div>
+            Total Home/Away games:
+            {{game.homeResult.avgHomeAwayGames + game.awayResult.avgHomeAwayGames | number : '1.2-2'}}
+        </div>
+        <div>
+            Total All games: {{game.homeResult.avgAllGames + game.awayResult.avgAllGames  | number : '1.2-2'}}
+        </div>
+        <div class="margin-top-10">
+            Power ratings 5 games:
+            {{game.homeResult.powerRating5Games | number : '1.2-2'}}/{{game.awayResult.powerRating5Games | number : '1.2-2'}}
+        </div>
+        <div>
+            Power ratings 10 games:
+            {{game.homeResult.powerRating10Games | number : '1.2-2'}}/{{game.awayResult.powerRating10Games | number : '1.2-2'}}
+        </div>
+        <div>
+            Power ratings:
+            {{game.homeResult.powerRatings | number : '1.2-2'}}/{{game.awayResult.powerRatings | number : '1.2-2'}}
+        </div>
+        <br>
     </li>
 </ul>

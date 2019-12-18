@@ -33,12 +33,12 @@ export class TeamListComponent implements OnInit {
         game.homeResult.teamId = scheduledGame.homeTeamId;
         game.awayResult = new TeamResults();
         game.awayResult.teamId = scheduledGame.awayTeamId;
-        this.games.push(game)
-      })
+        this.games.push(game);
+      });
       this.games.forEach((game: Game) => {
         this.getResults(game.homeResult.teamId);
         this.getResults(game.awayResult.teamId);
-      })
+      });
     });
   }
 
@@ -57,13 +57,14 @@ export class TeamListComponent implements OnInit {
       let game = this.games.find(x => x.homeResult.teamId === teamId);
       if (game) {
         game.homeResult.results = response;
+        this.computeAverages(game.homeResult, true);
       } else {
         game = this.games.find(x => x.awayResult.teamId === teamId);
         if (game) {
           game.awayResult.results = response;
+          this.computeAverages(game.awayResult, false);
         }
       }
-
     });
   }
 
@@ -75,4 +76,20 @@ export class TeamListComponent implements OnInit {
     return this.teams.find(x => x.teamId === id).urlName;
   }
 
+  computeAverages(teamResults: TeamResults, isHomeTeam: boolean) {
+    teamResults.avg5Games = teamResults.results.slice(0, 5).reduce((s, x) => s + x.homeScore, 0)
+      / Math.min(5, teamResults.results.length);
+    teamResults.avg10Games = teamResults.results.slice(0, 10).reduce((s, x) => s + x.homeScore, 0)
+      / Math.min(10, teamResults.results.length);
+    teamResults.avgAllGames = teamResults.results.reduce((s, x) => s + x.homeScore, 0)
+      / teamResults.results.length;
+    const homeAwayGames = teamResults.results.filter(x => x.isHomeTeam === isHomeTeam);
+    teamResults.avgHomeAwayGames = homeAwayGames.reduce((s, x) => s + x.homeScore, 0) / homeAwayGames.length;
+    teamResults.powerRatings = teamResults.results.reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0)
+      / teamResults.results.length;
+    teamResults.powerRating5Games = teamResults.results.slice(0, 5).reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0)
+      / Math.min(5, teamResults.results.length);
+    teamResults.powerRating10Games = teamResults.results.slice(0, 10).reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0)
+      / Math.min(10, teamResults.results.length);
+  }
 }
