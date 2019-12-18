@@ -1,5 +1,23 @@
 <ul>
-    <li *ngFor="let team of teams">
-        {{team.fullName}}
+    <li *ngFor="let game of games">
+        <div>
+            {{getTeamName(game.homeResult.teamId)}}
+            <ul *ngIf="game.homeResult.results">
+                <li *ngFor="let result of game.homeResult.results">
+                    {{result.isHomeTeam ? result.homeScore : result.awayScore}} -
+                    {{result.isHomeTeam ? result.awayScore : result.homeScore}}
+                </li>
+            </ul>
+        </div>
+        -
+        <div>
+            {{getTeamName(game.awayResult.teamId)}}
+            <ul *ngIf="game.awayResult.results">
+                <li *ngFor="let result of game.awayResult.results">
+                    {{result.isHomeTeam ? result.homeScore : result.awayScore}} -
+                    {{result.isHomeTeam ? result.awayScore : result.homeScore}}
+                </li>
+            </ul>
+        </div>
     </li>
 </ul>
