@@ -85,11 +85,20 @@ export class TeamListComponent implements OnInit {
       / teamResults.results.length;
     const homeAwayGames = teamResults.results.filter(x => x.isHomeTeam === isHomeTeam);
     teamResults.avgHomeAwayGames = homeAwayGames.reduce((s, x) => s + x.homeScore, 0) / homeAwayGames.length;
+
+    teamResults.avg5GamesAgainst = teamResults.results.slice(0, 5).reduce((s, x) => s + x.awayScore, 0)
+      / Math.min(5, teamResults.results.length);
+    teamResults.avg10GamesAgainst = teamResults.results.slice(0, 10).reduce((s, x) => s + x.awayScore, 0)
+      / Math.min(10, teamResults.results.length);
+    teamResults.avgAllGamesAgainst = teamResults.results.reduce((s, x) => s + x.awayScore, 0)
+      / teamResults.results.length;
+    teamResults.avgHomeAwayGamesAgainst = homeAwayGames.reduce((s, x) => s + x.awayScore, 0) / homeAwayGames.length;
+
     teamResults.powerRatings = teamResults.results.reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0)
       / teamResults.results.length;
-    teamResults.powerRating5Games = teamResults.results.slice(0, 5).reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0)
-      / Math.min(5, teamResults.results.length);
-    teamResults.powerRating10Games = teamResults.results.slice(0, 10).reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0)
-      / Math.min(10, teamResults.results.length);
+    teamResults.powerRating5Games = teamResults.results.slice(0, 5)
+      .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(5, teamResults.results.length);
+    teamResults.powerRating10Games = teamResults.results.slice(0, 10)
+      .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(10, teamResults.results.length);
   }
 }

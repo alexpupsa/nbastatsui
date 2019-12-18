@@ -4,33 +4,40 @@
             {{getTeamName(game.homeResult.teamId)}} - {{getTeamName(game.awayResult.teamId)}}
         </div>
         <div class="margin-top-10">
-            Average 5 games: {{game.homeResult.avg5Games | number : '1.2-2'}} -
-            {{game.awayResult.avg5Games | number : '1.2-2'}}
+            Average 5 games: {{(game.homeResult.avg5Games + game.awayResult.avg5GamesAgainst) / 2 | number : '1.2-2'}} -
+            {{(game.awayResult.avg5Games + game.homeResult.avg5GamesAgainst) / 2 | number : '1.2-2'}}
         </div>
         <div>
-            Average 10 games: {{game.homeResult.avg10Games | number : '1.2-2'}} -
-            {{game.awayResult.avg10Games | number : '1.2-2'}}
+            Average 10 games:
+            {{(game.homeResult.avg10Games + game.awayResult.avg10GamesAgainst) / 2 | number : '1.2-2'}}
+            -
+            {{(game.awayResult.avg10Games + game.homeResult.avg10GamesAgainst) / 2 | number : '1.2-2'}}
         </div>
         <div>
-            Average Home/Away games: {{game.homeResult.avgHomeAwayGames | number : '1.2-2'}} -
-            {{game.awayResult.avgHomeAwayGames | number : '1.2-2'}}
+            Average Home/Away games:
+            {{(game.homeResult.avgHomeAwayGames + game.awayResult.avgHomeAwayGamesAgainst) / 2 | number : '1.2-2'}} -
+            {{(game.awayResult.avgHomeAwayGames + game.homeResult.avgHomeAwayGamesAgainst) / 2 | number : '1.2-2'}}
         </div>
         <div>
-            Average All games: {{game.homeResult.avgAllGames | number : '1.2-2'}} -
-            {{game.awayResult.avgAllGames | number : '1.2-2'}}
+            Average All games:
+            {{(game.homeResult.avgAllGames + game.awayResult.avgAllGamesAgainst) / 2 | number : '1.2-2'}} -
+            {{(game.awayResult.avgAllGames + game.homeResult.avgAllGamesAgainst) / 2 | number : '1.2-2'}}
         </div>
         <div class="margin-top-10">
-            Total 5 games: {{game.homeResult.avg5Games + game.awayResult.avg5Games | number : '1.2-2'}}
+            Total 5 games:
+            {{(game.homeResult.avg5Games + game.awayResult.avg5GamesAgainst) / 2 + (game.awayResult.avg5Games + game.homeResult.avg5GamesAgainst) / 2 | number : '1.2-2'}}
         </div>
         <div>
-            Total 10 games: {{game.homeResult.avg10Games + game.awayResult.avg10Games | number : '1.2-2'}}
+            Total 10 games:
+            {{(game.homeResult.avg10Games + game.awayResult.avg10GamesAgainst) / 2 + (game.awayResult.avg10Games + game.homeResult.avg10GamesAgainst) / 2 | number : '1.2-2'}}
         </div>
         <div>
             Total Home/Away games:
-            {{game.homeResult.avgHomeAwayGames + game.awayResult.avgHomeAwayGames | number : '1.2-2'}}
+            {{(game.homeResult.avgHomeAwayGames + game.awayResult.avgHomeAwayGamesAgainst) / 2 + (game.awayResult.avgHomeAwayGames + game.homeResult.avgHomeAwayGamesAgainst) / 2 | number : '1.2-2'}}
         </div>
         <div>
-            Total All games: {{game.homeResult.avgAllGames + game.awayResult.avgAllGames  | number : '1.2-2'}}
+            Total All games:
+            {{(game.homeResult.avgAllGames + game.awayResult.avgAllGamesAgainst) / 2 + (game.awayResult.avgAllGames + game.homeResult.avgAllGamesAgainst) / 2  | number : '1.2-2'}}
         </div>
         <div class="margin-top-10">
             Power ratings 5 games:

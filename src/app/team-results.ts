@@ -7,6 +7,10 @@ export class TeamResults {
     avg10Games: number;
     avgHomeAwayGames: number;
     avgAllGames: number;
+    avg5GamesAgainst: number;
+    avg10GamesAgainst: number;
+    avgHomeAwayGamesAgainst: number;
+    avgAllGamesAgainst: number;
     powerRatings: number;
     powerRating5Games: number;
     powerRating10Games: number;
