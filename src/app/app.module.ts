@@ -11,10 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 
+import { SignedPipe } from './pipes/signed.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
-    TeamListComponent
+    TeamListComponent,
+    SignedPipe
   ],
   imports: [
     BrowserModule,

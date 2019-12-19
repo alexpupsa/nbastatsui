@@ -85,18 +85,18 @@
                             <ng-template pTemplate="body">
                                 <tr>
                                     <td>Power ratings 5 games</td>
-                                    <td>{{game.homeResult.powerRating5Games | number : '1.0-2'}}</td>
-                                    <td>{{game.awayResult.powerRating5Games | number : '1.0-2'}}</td>
+                                    <td>{{game.homeResult.powerRating5Games | number : '1.0-2' | signed}}</td>
+                                    <td>{{game.awayResult.powerRating5Games | number : '1.0-2' | signed}}</td>
                                 </tr>
                                 <tr>
                                     <td>Power ratings 10 games</td>
-                                    <td>{{game.homeResult.powerRating10Games | number : '1.0-2'}}</td>
-                                    <td>{{game.awayResult.powerRating10Games | number : '1.0-2'}}</td>
+                                    <td>{{game.homeResult.powerRating10Games | number : '1.0-2' | signed}}</td>
+                                    <td>{{game.awayResult.powerRating10Games | number : '1.0-2' | signed}}</td>
                                 </tr>
                                 <tr>
                                     <td>Power ratings All</td>
-                                    <td>{{game.homeResult.powerRatings | number : '1.0-2'}}</td>
-                                    <td>{{game.awayResult.powerRatings | number : '1.0-2'}}</td>
+                                    <td>{{game.homeResult.powerRatings | number : '1.0-2' | signed}}</td>
+                                    <td>{{game.awayResult.powerRatings | number : '1.0-2' | signed}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
