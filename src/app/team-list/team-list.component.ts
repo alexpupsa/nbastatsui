@@ -6,6 +6,8 @@ import { ScheduledGame } from '../scheduled-game';
 import { TeamResults } from '../team-results';
 import { GameResult } from '../game-result';
 import { Game } from '../game';
+import { ComputedTeamResults } from '../computed-team-results';
+import { ComputedTeamTotals } from '../computed-team-totals';
 
 @Component({
   selector: 'app-team-list',
@@ -19,11 +21,14 @@ export class TeamListComponent implements OnInit {
 
   date: Date;
 
+  countResults: number;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.games = [];
     this.date = this.getDate();
+    this.countResults = 0;
     this.getTeams();
   }
 
@@ -70,6 +75,10 @@ export class TeamListComponent implements OnInit {
           this.computeAverages(game.awayResult, false);
         }
       }
+      this.countResults++;
+      if (this.countResults === this.games.length * 2) {
+        this.computeAll();
+      }
     });
   }
 
@@ -107,6 +116,28 @@ export class TeamListComponent implements OnInit {
       .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(10, teamResults.results.length);
   }
 
+  computeAll() {
+    this.games.forEach((game: Game) => {
+      game.computedHomeResult = new ComputedTeamResults();
+      game.computedHomeResult.avg5Games = (game.homeResult.avg5Games + game.awayResult.avg5GamesAgainst) / 2;
+      game.computedHomeResult.avg10Games = (game.homeResult.avg10Games + game.awayResult.avg10GamesAgainst) / 2;
+      game.computedHomeResult.avgHomeAwayGames = (game.homeResult.avgHomeAwayGames + game.awayResult.avgHomeAwayGamesAgainst) / 2;
+      game.computedHomeResult.avgAllGames = (game.homeResult.avgAllGames + game.awayResult.avgAllGamesAgainst) / 2;
+
+      game.computedAwayResult = new ComputedTeamResults();
+      game.computedAwayResult.avg5Games = (game.awayResult.avg5Games + game.homeResult.avg5GamesAgainst) / 2;
+      game.computedAwayResult.avg10Games = (game.awayResult.avg10Games + game.homeResult.avg10GamesAgainst) / 2;
+      game.computedAwayResult.avgHomeAwayGames = (game.awayResult.avgHomeAwayGames + game.homeResult.avgHomeAwayGamesAgainst) / 2;
+      game.computedAwayResult.avgAllGames = (game.awayResult.avgAllGames + game.homeResult.avgAllGamesAgainst) / 2;
+
+      game.computedTotals = new ComputedTeamTotals();
+      game.computedTotals.total5Games = game.computedHomeResult.avg5Games + game.computedAwayResult.avg5Games;
+      game.computedTotals.total10Games = game.computedHomeResult.avg10Games + game.computedAwayResult.avg10Games;
+      game.computedTotals.totalHomeAwayGames = game.computedHomeResult.avgHomeAwayGames + game.computedAwayResult.avgHomeAwayGames;
+      game.computedTotals.totalAllGames = game.computedHomeResult.avgAllGames + game.computedAwayResult.avgAllGames;
+    });
+  }
+
   getDate() {
     const date = new Date();
     if (date.getHours() < 8) {
@@ -117,6 +148,7 @@ export class TeamListComponent implements OnInit {
 
   onSelectDate(event: any) {
     this.games = [];
+    this.countResults = 0;
     this.getTeams();
   }
 }
