@@ -17,15 +17,19 @@ export class TeamListComponent implements OnInit {
   teams: Team[];
   games: Game[];
 
+  date: Date;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.games = [];
+    this.date = this.getDate();
     this.getTeams();
   }
 
   getSchedule() {
-    const url = `${environment.apiUrl}/stats/schedule`;
+    const date = encodeURIComponent(this.date.toDateString());
+    const url = `${environment.apiUrl}/stats/schedule/${date}`;
     this.http.get(url).subscribe((response: ScheduledGame[]) => {
       response.forEach((scheduledGame: ScheduledGame) => {
         const game = new Game();
@@ -52,7 +56,8 @@ export class TeamListComponent implements OnInit {
 
   getResults(teamId: string) {
     const teamName = this.getTeamUrlName(teamId);
-    const url = `${environment.apiUrl}/stats/results/${teamName}`;
+    const date = encodeURIComponent(this.date.toDateString());
+    const url = `${environment.apiUrl}/stats/results/${teamName}/${date}`;
     this.http.get(url).subscribe((response: GameResult[]) => {
       let game = this.games.find(x => x.homeResult.teamId === teamId);
       if (game) {
@@ -100,5 +105,18 @@ export class TeamListComponent implements OnInit {
       .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(5, teamResults.results.length);
     teamResults.powerRating10Games = teamResults.results.slice(0, 10)
       .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(10, teamResults.results.length);
+  }
+
+  getDate() {
+    const date = new Date();
+    if (date.getHours() < 8) {
+      date.setDate(date.getDate() - 1);
+    }
+    return date;
+  }
+
+  onSelectDate(event: any) {
+    this.games = [];
+    this.getTeams();
   }
 }
