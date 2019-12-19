@@ -20,8 +20,11 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: 'dist'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  displayName: 'Publish Artifacts'
+  
