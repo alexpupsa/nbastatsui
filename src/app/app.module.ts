@@ -9,6 +9,7 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { CalendarModule } from 'primeng/calendar';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     CalendarModule,
-    FormsModule
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
