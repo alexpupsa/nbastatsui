@@ -138,7 +138,7 @@ export class TeamListComponent implements OnInit {
       game.computedTotals = new ComputedTeamTotals();
       game.computedTotals.total5Games = game.computedHomeResult.avg5Games + game.computedAwayResult.avg5Games;
       game.computedTotals.total10Games = game.computedHomeResult.avg10Games + game.computedAwayResult.avg10Games;
-      game.computedTotals.totalHomeAwayGames = game.computedHomeResult.avg5HomeAwayGames + game.computedAwayResult.avg5HomeAwayGames;
+      game.computedTotals.total5HomeAwayGames = game.computedHomeResult.avg5HomeAwayGames + game.computedAwayResult.avg5HomeAwayGames;
       game.computedTotals.totalHomeAwayGames = game.computedHomeResult.avgHomeAwayGames + game.computedAwayResult.avgHomeAwayGames;
       game.computedTotals.totalAllGames = game.computedHomeResult.avgAllGames + game.computedAwayResult.avgAllGames;
     });
