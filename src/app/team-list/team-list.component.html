@@ -32,7 +32,12 @@
                                     <td>{{game.computedAwayResult.avg10Games | number : '1.0-2'}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Average H/A games</td>
+                                    <td>Average 5 Home/Away games</td>
+                                    <td>{{game.computedHomeResult.avg5HomeAwayGames | number : '1.0-2'}}</td>
+                                    <td>{{game.computedAwayResult.avg5HomeAwayGames | number : '1.0-2'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Average Home/Away games</td>
                                     <td>{{game.computedHomeResult.avgHomeAwayGames | number : '1.0-2'}}</td>
                                     <td>{{game.computedAwayResult.avgHomeAwayGames | number : '1.0-2'}}</td>
                                 </tr>
@@ -63,7 +68,11 @@
                                     <td colspan="2">{{game.computedTotals.total10Games | number : '1.0-2'}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Total H/A games</td>
+                                    <td>Total 5 Home/Away games</td>
+                                    <td colspan="2">{{game.computedTotals.total5HomeAwayGames | number : '1.0-2'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Home/Away games</td>
                                     <td colspan="2">{{game.computedTotals.totalHomeAwayGames | number : '1.0-2'}}</td>
                                 </tr>
                                 <tr>
