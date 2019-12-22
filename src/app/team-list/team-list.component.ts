@@ -23,12 +23,15 @@ export class TeamListComponent implements OnInit {
 
   countResults: number;
 
+  isLoading: boolean;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.games = [];
     this.date = this.getDate();
     this.countResults = 0;
+    this.isLoading = true;
     this.getTeams();
   }
 
@@ -142,6 +145,7 @@ export class TeamListComponent implements OnInit {
       game.computedTotals.totalHomeAwayGames = game.computedHomeResult.avgHomeAwayGames + game.computedAwayResult.avgHomeAwayGames;
       game.computedTotals.totalAllGames = game.computedHomeResult.avgAllGames + game.computedAwayResult.avgAllGames;
     });
+    this.isLoading = false;
   }
 
   getDate() {
@@ -155,6 +159,7 @@ export class TeamListComponent implements OnInit {
   onSelectDate(event: any) {
     this.games = [];
     this.countResults = 0;
+    this.isLoading = true;
     this.getTeams();
   }
 }

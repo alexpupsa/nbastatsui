@@ -4,112 +4,115 @@
             <p-calendar [(ngModel)]="date" (onSelect)="onSelectDate($event)" dateFormat="dd-MM-yy"></p-calendar>
         </div>
     </div>
-    <div class="row">
+    <div *ngIf="isLoading" class="row margin-top-10 center-text">
+        <div class="col spinner">
+            <p-progressSpinner [style]="{width: '100px', height: '100px'}"></p-progressSpinner>
+        </div>
+    </div>
+    <div *ngIf="!isLoading" class="row margin-top-10">
         <div class="col">
-            <div class="margin-top-10">
-                <div *ngFor="let game of games">
-                    <div class="margin-top-20">
-                        <b>{{getTeamName(game.homeResult.teamId)}} - {{getTeamName(game.awayResult.teamId)}}</b>
-                    </div>
-                    <div class="margin-top-10">
-                        <p-table [value]="[{}]">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th></th>
-                                    <th>{{getTeamName(game.homeResult.teamId)}}</th>
-                                    <th>{{getTeamName(game.awayResult.teamId)}}</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body">
-                                <tr>
-                                    <td>Average 5 games</td>
-                                    <td>{{game.computedHomeResult.avg5Games | number : '1.0-2'}}</td>
-                                    <td>{{game.computedAwayResult.avg5Games | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Average 10 games</td>
-                                    <td>{{game.computedHomeResult.avg10Games | number : '1.0-2'}}</td>
-                                    <td>{{game.computedAwayResult.avg10Games | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Average 5 Home/Away games</td>
-                                    <td>{{game.computedHomeResult.avg5HomeAwayGames | number : '1.0-2'}}</td>
-                                    <td>{{game.computedAwayResult.avg5HomeAwayGames | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Average Home/Away games</td>
-                                    <td>{{game.computedHomeResult.avgHomeAwayGames | number : '1.0-2'}}</td>
-                                    <td>{{game.computedAwayResult.avgHomeAwayGames | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Average All games</td>
-                                    <td>{{game.computedHomeResult.avgAllGames | number : '1.0-2'}}</td>
-                                    <td>{{game.computedAwayResult.avgAllGames | number : '1.0-2'}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                    <div class="margin-top-10">
-                        <p-table [value]="[{}]">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th></th>
-                                    <th colspan="2">{{getTeamName(game.homeResult.teamId)}} -
-                                        {{getTeamName(game.awayResult.teamId)}}</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body">
-                                <tr>
-                                    <td>Total 5 games</td>
-                                    <td colspan="2">{{game.computedTotals.total5Games | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total 10 games</td>
-                                    <td colspan="2">{{game.computedTotals.total10Games | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total 5 Home/Away games</td>
-                                    <td colspan="2">{{game.computedTotals.total5HomeAwayGames | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total Home/Away games</td>
-                                    <td colspan="2">{{game.computedTotals.totalHomeAwayGames | number : '1.0-2'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total All games</td>
-                                    <td colspan="2">{{game.computedTotals.totalAllGames | number : '1.0-2'}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                    <div class="margin-top-10">
-                        <p-table [value]="[{}]">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th></th>
-                                    <th>{{getTeamName(game.homeResult.teamId)}}</th>
-                                    <th>{{getTeamName(game.awayResult.teamId)}}</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body">
-                                <tr>
-                                    <td>Power ratings 5 games</td>
-                                    <td>{{game.homeResult.powerRating5Games | number : '1.0-2' | signed}}</td>
-                                    <td>{{game.awayResult.powerRating5Games | number : '1.0-2' | signed}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Power ratings 10 games</td>
-                                    <td>{{game.homeResult.powerRating10Games | number : '1.0-2' | signed}}</td>
-                                    <td>{{game.awayResult.powerRating10Games | number : '1.0-2' | signed}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Power ratings All</td>
-                                    <td>{{game.homeResult.powerRatings | number : '1.0-2' | signed}}</td>
-                                    <td>{{game.awayResult.powerRatings | number : '1.0-2' | signed}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
+            <div *ngFor="let game of games">
+                <div class="margin-top-20">
+                    <b>{{getTeamName(game.homeResult.teamId)}} - {{getTeamName(game.awayResult.teamId)}}</b>
+                </div>
+                <div class="margin-top-10">
+                    <p-table [value]="[{}]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th>{{getTeamName(game.homeResult.teamId)}}</th>
+                                <th>{{getTeamName(game.awayResult.teamId)}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body">
+                            <tr>
+                                <td>Average 5 games</td>
+                                <td>{{game.computedHomeResult.avg5Games | number : '1.0-2'}}</td>
+                                <td>{{game.computedAwayResult.avg5Games | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Average 10 games</td>
+                                <td>{{game.computedHomeResult.avg10Games | number : '1.0-2'}}</td>
+                                <td>{{game.computedAwayResult.avg10Games | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Average 5 Home/Away games</td>
+                                <td>{{game.computedHomeResult.avg5HomeAwayGames | number : '1.0-2'}}</td>
+                                <td>{{game.computedAwayResult.avg5HomeAwayGames | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Average Home/Away games</td>
+                                <td>{{game.computedHomeResult.avgHomeAwayGames | number : '1.0-2'}}</td>
+                                <td>{{game.computedAwayResult.avgHomeAwayGames | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Average All games</td>
+                                <td>{{game.computedHomeResult.avgAllGames | number : '1.0-2'}}</td>
+                                <td>{{game.computedAwayResult.avgAllGames | number : '1.0-2'}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="margin-top-10">
+                    <p-table [value]="[{}]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th colspan="2">{{getTeamName(game.homeResult.teamId)}} -
+                                    {{getTeamName(game.awayResult.teamId)}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body">
+                            <tr>
+                                <td>Total 5 games</td>
+                                <td colspan="2">{{game.computedTotals.total5Games | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total 10 games</td>
+                                <td colspan="2">{{game.computedTotals.total10Games | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total 5 Home/Away games</td>
+                                <td colspan="2">{{game.computedTotals.total5HomeAwayGames | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Home/Away games</td>
+                                <td colspan="2">{{game.computedTotals.totalHomeAwayGames | number : '1.0-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total All games</td>
+                                <td colspan="2">{{game.computedTotals.totalAllGames | number : '1.0-2'}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="margin-top-10">
+                    <p-table [value]="[{}]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th>{{getTeamName(game.homeResult.teamId)}}</th>
+                                <th>{{getTeamName(game.awayResult.teamId)}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body">
+                            <tr>
+                                <td>Power ratings 5 games</td>
+                                <td>{{game.homeResult.powerRating5Games | number : '1.0-2' | signed}}</td>
+                                <td>{{game.awayResult.powerRating5Games | number : '1.0-2' | signed}}</td>
+                            </tr>
+                            <tr>
+                                <td>Power ratings 10 games</td>
+                                <td>{{game.homeResult.powerRating10Games | number : '1.0-2' | signed}}</td>
+                                <td>{{game.awayResult.powerRating10Games | number : '1.0-2' | signed}}</td>
+                            </tr>
+                            <tr>
+                                <td>Power ratings All</td>
+                                <td>{{game.homeResult.powerRatings | number : '1.0-2' | signed}}</td>
+                                <td>{{game.awayResult.powerRatings | number : '1.0-2' | signed}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
             </div>
         </div>

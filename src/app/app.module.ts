@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { SignedPipe } from './pipes/signed.pipe';
 
@@ -26,7 +27,8 @@ import { SignedPipe } from './pipes/signed.pipe';
     HttpClientModule,
     FormsModule,
     CalendarModule,
-    TableModule
+    TableModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

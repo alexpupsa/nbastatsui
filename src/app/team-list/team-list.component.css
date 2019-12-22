@@ -14,3 +14,8 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.spinner {
+  display: inline-block;
+  margin-top: 100px;
+}
