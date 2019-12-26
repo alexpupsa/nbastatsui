@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Team } from '../team';
+import { Team } from '../models/team';
 import { environment } from 'src/environments/environment';
-import { ScheduledGame } from '../scheduled-game';
-import { TeamResults } from '../team-results';
-import { GameResult } from '../game-result';
-import { Game } from '../game';
-import { ComputedTeamResults } from '../computed-team-results';
-import { ComputedTeamTotals } from '../computed-team-totals';
+import { ScheduledGame } from '../models/scheduled-game';
+import { TeamResults } from '../models/team-results';
+import { GameResult } from '../models/game-result';
+import { Game } from '../models/game';
+import { ComputedTeamResults } from '../models/computed-team-results';
+import { ComputedTeamTotals } from '../models/computed-team-totals';
 
 @Component({
   selector: 'app-team-list',
