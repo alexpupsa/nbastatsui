@@ -120,6 +120,8 @@ export class TeamListComponent implements OnInit {
       .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(5, teamResults.results.length);
     teamResults.powerRating10Games = teamResults.results.slice(0, 10)
       .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(10, teamResults.results.length);
+    teamResults.powerRatings5HomeAwayGames = homeAwayGames.slice(0, 5)
+      .reduce((s, x) => s + x.homeScore - x.awayScore + (x.isHomeTeam ? 3 : 0), 0) / Math.min(5, homeAwayGames.length);
   }
 
   computeAll() {

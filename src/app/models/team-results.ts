@@ -16,4 +16,5 @@ export class TeamResults {
     powerRatings: number;
     powerRating5Games: number;
     powerRating10Games: number;
+    powerRatings5HomeAwayGames: number;
 }

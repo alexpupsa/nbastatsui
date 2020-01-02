@@ -111,6 +111,11 @@
                                 <td>{{game.homeResult.powerRatings | number : '1.0-2' | signed}}</td>
                                 <td>{{game.awayResult.powerRatings | number : '1.0-2' | signed}}</td>
                             </tr>
+                            <tr>
+                                <td>Power ratings 5 Home/Away games</td>
+                                <td>{{game.homeResult.powerRatings5HomeAwayGames | number : '1.0-2' | signed}}</td>
+                                <td>{{game.awayResult.powerRatings5HomeAwayGames | number : '1.0-2' | signed}}</td>
+                            </tr>
                         </ng-template>
                     </p-table>
                 </div>
