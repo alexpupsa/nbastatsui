@@ -1,7 +1,8 @@
 <div class="container margins-container">
     <div class="row">
         <div class="col">
-            <p-calendar [(ngModel)]="date" (onSelect)="onSelectDate($event)" dateFormat="dd-MM-yy"></p-calendar>
+            <p-calendar [(ngModel)]="date" (onSelect)="onSelectDate($event)" dateFormat="dd-MM-yy"
+                [locale]="calendarSettings"></p-calendar>
         </div>
     </div>
     <div *ngIf="isLoading" class="row margin-top-10 center-text">
