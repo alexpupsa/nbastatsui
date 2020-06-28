@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://nbastatsapi.azurewebsites.net/api'
+  apiUrl: 'http://35.157.141.237/api'
 };
