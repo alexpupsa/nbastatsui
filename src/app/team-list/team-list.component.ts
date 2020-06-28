@@ -24,8 +24,11 @@ export class TeamListComponent implements OnInit {
   countResults: number;
 
   isLoading: boolean;
+  isError: boolean;
 
   calendarSettings: any;
+
+  errorText: string;
 
   constructor(private http: HttpClient) { }
 
@@ -67,8 +70,13 @@ export class TeamListComponent implements OnInit {
           this.getResults(game.awayResult.teamId);
         });
       } else {
+        this.isError = true;
+        this.errorText = '🏀🏀🏀 NO GAMES TODAY ☹️☹️☹️';
         this.isLoading = false;
       }
+    }, () => {
+      this.isError = true;
+      this.errorText = '🏀🏀🏀 CANNOT CONNECT TO SERVER ☹️☹️☹️'
     });
   }
 
@@ -166,6 +174,7 @@ export class TeamListComponent implements OnInit {
       game.computedTotals.totalAllGames = game.computedHomeResult.avgAllGames + game.computedAwayResult.avgAllGames;
     });
     this.isLoading = false;
+    this.isError = false;
   }
 
   getDate() {

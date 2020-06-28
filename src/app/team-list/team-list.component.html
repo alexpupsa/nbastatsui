@@ -10,10 +10,10 @@
             <p-progressSpinner [style]="{width: '100px', height: '100px'}"></p-progressSpinner>
         </div>
     </div>
-    <div *ngIf="!isLoading && games.length === 0" class="row margin-top-50 center-text">
+    <div *ngIf="isError" class="row margin-top-50 center-text">
         <div class="col">
             <h3>
-                🏀🏀🏀 NO GAMES TODAY ☹️☹️☹️
+                {{ errorText }}
             </h3>
         </div>
     </div>
