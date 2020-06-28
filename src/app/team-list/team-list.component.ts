@@ -61,10 +61,14 @@ export class TeamListComponent implements OnInit {
         game.awayResult.teamId = scheduledGame.awayTeamId;
         this.games.push(game);
       });
-      this.games.forEach((game: Game) => {
-        this.getResults(game.homeResult.teamId);
-        this.getResults(game.awayResult.teamId);
-      });
+      if (this.games.length > 0) {
+        this.games.forEach((game: Game) => {
+          this.getResults(game.homeResult.teamId);
+          this.getResults(game.awayResult.teamId);
+        });
+      } else {
+        this.isLoading = false;
+      }
     });
   }
 

@@ -10,6 +10,13 @@
             <p-progressSpinner [style]="{width: '100px', height: '100px'}"></p-progressSpinner>
         </div>
     </div>
+    <div *ngIf="!isLoading && games.length === 0" class="row margin-top-50 center-text">
+        <div class="col">
+            <h3>
+                🏀🏀🏀 NO GAMES TODAY ☹️☹️☹️
+            </h3>
+        </div>
+    </div>
     <div *ngIf="!isLoading" class="row margin-top-10">
         <div class="col">
             <div *ngFor="let game of games">
