@@ -76,7 +76,8 @@ export class TeamListComponent implements OnInit {
       }
     }, () => {
       this.isError = true;
-      this.errorText = '🏀🏀🏀 CANNOT CONNECT TO SERVER ☹️☹️☹️'
+      this.errorText = '🏀🏀🏀 CANNOT CONNECT TO SERVER ☹️☹️☹️';
+      this.isLoading = false;
     });
   }
 
@@ -85,6 +86,10 @@ export class TeamListComponent implements OnInit {
     this.http.get(url).subscribe((response: Team[]) => {
       this.teams = response;
       this.getSchedule();
+    }, () => {
+      this.isError = true;
+      this.errorText = '🏀🏀🏀 CANNOT CONNECT TO SERVER ☹️☹️☹️';
+      this.isLoading = false;
     });
   }
 
