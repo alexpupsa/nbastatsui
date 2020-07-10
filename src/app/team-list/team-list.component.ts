@@ -194,6 +194,7 @@ export class TeamListComponent implements OnInit {
     this.games = [];
     this.countResults = 0;
     this.isLoading = true;
+    this.isError = true;
     this.getTeams();
   }
 }
